@@ -27,63 +27,75 @@ environment = SubResource("Environment_qbfdl")
 transform = Transform3D(0.990268, 0.0193692, -0.137819, 0, 0.990268, 0.139173, 0.139173, -0.137819, 0.980631, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Floor" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+[node name="Platform_01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -6.5)
+
+[node name="Floor_01" type="CSGBox3D" parent="Platform_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 6.5)
 use_collision = true
 size = Vector3(25, 0.5, 25)
 material = ExtResource("2_40uua")
 
-[node name="Walls" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -6.5)
-
-[node name="Wall_01" type="CSGBox3D" parent="Walls"]
+[node name="Wall_01" type="CSGBox3D" parent="Platform_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.25, 0.25, 6.5)
 use_collision = true
 size = Vector3(0.5, 2, 25)
 material = ExtResource("3_l461q")
 
-[node name="Wall_02" type="CSGBox3D" parent="Walls"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.25, 18.75)
+[node name="Wall_02" type="CSGBox3D" parent="Platform_01"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0.25, 18.75)
 use_collision = true
-size = Vector3(0.5, 2, 24)
+size = Vector3(0.5, 2, 10)
 material = ExtResource("3_l461q")
 
-[node name="Wall_03" type="CSGBox3D" parent="Walls"]
+[node name="Wall_03" type="CSGBox3D" parent="Platform_01"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.25, -5.75)
 use_collision = true
 size = Vector3(0.5, 2, 24)
 material = ExtResource("3_l461q")
 
-[node name="Wall_04" type="CSGBox3D" parent="Walls"]
+[node name="Wall_04" type="CSGBox3D" parent="Platform_01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.25, 0.25, 6.5)
 use_collision = true
 size = Vector3(0.5, 2, 25)
 material = ExtResource("3_l461q")
 
-[node name="TestStairs" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -6.5)
-
-[node name="Block_01" type="CSGBox3D" parent="TestStairs"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+[node name="Wall_05" type="CSGBox3D" parent="Platform_01"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0.25, 18.75)
 use_collision = true
-size = Vector3(2, 0.5, 3)
+size = Vector3(0.5, 2, 10)
+material = ExtResource("3_l461q")
+
+[node name="Block_01" type="CSGBox3D" parent="Platform_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.75)
+use_collision = true
+size = Vector3(2, 1.7, 0.5)
 material = ExtResource("3_w1mgy")
 
-[node name="Block_02" type="CSGBox3D" parent="TestStairs"]
+[node name="Block_02" type="CSGBox3D" parent="Platform_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -1)
 use_collision = true
-size = Vector3(2, 0.5, 2)
+size = Vector3(2, 0.5, 4)
 material = ExtResource("3_w1mgy")
 
-[node name="Block_03" type="CSGBox3D" parent="TestStairs"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
+[node name="Block_03" type="CSGBox3D" parent="Platform_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -2.75)
 use_collision = true
-size = Vector3(2, 0.5, 1)
+size = Vector3(2, 1.7, 0.5)
 material = ExtResource("3_w1mgy")
 
-[node name="Block_04" type="CSGBox3D" parent="TestStairs"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.5)
+[node name="Platform_02" type="Node3D" parent="."]
+
+[node name="Floor_01" type="CSGBox3D" parent="Platform_02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.63, 39.18)
 use_collision = true
-size = Vector3(2, 0.5, 3)
-material = ExtResource("3_w1mgy")
+size = Vector3(25, 0.5, 25)
+material = ExtResource("2_40uua")
+
+[node name="Ramp_01" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.7, 19.5)
+use_collision = true
+size = Vector3(4, 0.5, 15)
+material = ExtResource("2_40uua")
 
 [node name="Player" parent="." instance=ExtResource("3_7qfvu")]
