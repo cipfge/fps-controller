@@ -1,9 +1,10 @@
 extends CenterContainer
 
+@export var DotVisible: bool = false
 @export var DotRadius: float = 1.0
 @export var DotColor: Color = Color.WHITE
 @export var CrosshairSpeed: float = 0.25
-@export var CrosshairDistance: float = 2.0
+@export var CrosshairDistance: float = 2.5
 
 @export var fps_controller: CharacterBody3D
 
@@ -16,7 +17,8 @@ func _process(_delta: float) -> void:
     update_crosshair_lines()
 
 func _draw() -> void:
-    draw_circle(Vector2.ZERO, DotRadius, DotColor)
+    if DotVisible:
+        draw_circle(Vector2.ZERO, DotRadius, DotColor)
 
 func update_crosshair_lines():
     # Get player velocity and calculate movement speed by calculating the distance from origin point to velocity

@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://doayvc0xisily"]
 
-[ext_resource type="Script" path="res://controllers/player.gd" id="1_g3qal"]
-[ext_resource type="Material" uid="uid://c7w5nhqc43peh" path="res://materials/player.tres" id="2_ds2y7"]
-[ext_resource type="Script" path="res://controllers/crosshair.gd" id="3_65rq4"]
-[ext_resource type="Theme" uid="uid://dm8mdrmxeor0w" path="res://user_interface/theme.tres" id="4_36crs"]
-[ext_resource type="StyleBox" uid="uid://b0cvpuvm050vs" path="res://user_interface/style_box.tres" id="5_ju3dp"]
-[ext_resource type="Script" path="res://controllers/debug.gd" id="6_8akev"]
+[ext_resource type="Script" path="res://controllers/scripts/fps_controller.gd" id="1_g3qal"]
+[ext_resource type="Material" uid="uid://c7w5nhqc43peh" path="res://materials/fps_controller.tres" id="2_ds2y7"]
+[ext_resource type="Script" path="res://controllers/scripts/crosshair.gd" id="3_65rq4"]
+[ext_resource type="Theme" uid="uid://dm8mdrmxeor0w" path="res://user_interface/theme/debug_ui_theme.tres" id="4_36crs"]
+[ext_resource type="StyleBox" uid="uid://b0cvpuvm050vs" path="res://user_interface/theme/debug_ui_style_box.tres" id="5_ju3dp"]
+[ext_resource type="Script" path="res://controllers/scripts/debug.gd" id="6_8akev"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8fcdc"]
 
@@ -122,7 +122,7 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rk3ce"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="FpsController" type="CharacterBody3D"]
 script = ExtResource("1_g3qal")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]

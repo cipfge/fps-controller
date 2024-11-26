@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ytynpl8knjpb" path="res://assets/hdri/starry_night_sky_dome_2k.hdr" id="1_nnqtj"]
 [ext_resource type="Material" uid="uid://ccxbxpus0b7dr" path="res://materials/floor.tres" id="2_40uua"]
-[ext_resource type="PackedScene" uid="uid://doayvc0xisily" path="res://controllers/player.tscn" id="3_7qfvu"]
+[ext_resource type="PackedScene" uid="uid://doayvc0xisily" path="res://controllers/fps_controller.tscn" id="3_7qfvu"]
 [ext_resource type="Material" uid="uid://drn0jdu8i1pjl" path="res://materials/wall.tres" id="3_l461q"]
 [ext_resource type="Material" uid="uid://dh06onqtxmfyw" path="res://materials/block.tres" id="3_w1mgy"]
 
@@ -43,9 +43,9 @@ size = Vector3(0.5, 2, 25)
 material = ExtResource("3_l461q")
 
 [node name="Wall_02" type="CSGBox3D" parent="Platform_01"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0.25, 18.75)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.25, 18.75)
 use_collision = true
-size = Vector3(0.5, 2, 10)
+size = Vector3(0.5, 2, 24)
 material = ExtResource("3_l461q")
 
 [node name="Wall_03" type="CSGBox3D" parent="Platform_01"]
@@ -58,12 +58,6 @@ material = ExtResource("3_l461q")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.25, 0.25, 6.5)
 use_collision = true
 size = Vector3(0.5, 2, 25)
-material = ExtResource("3_l461q")
-
-[node name="Wall_05" type="CSGBox3D" parent="Platform_01"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0.25, 18.75)
-use_collision = true
-size = Vector3(0.5, 2, 10)
 material = ExtResource("3_l461q")
 
 [node name="Block_01" type="CSGBox3D" parent="Platform_01"]
@@ -83,19 +77,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -2.25)
 use_collision = true
 size = Vector3(6, 1.7, 0.5)
 material = ExtResource("3_w1mgy")
-
-[node name="Platform_02" type="Node3D" parent="."]
-
-[node name="Floor_01" type="CSGBox3D" parent="Platform_02"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.63, 39.18)
-use_collision = true
-size = Vector3(25, 0.5, 25)
-material = ExtResource("2_40uua")
-
-[node name="Ramp_01" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.7, 19.5)
-use_collision = true
-size = Vector3(4, 0.5, 15)
-material = ExtResource("2_40uua")
 
 [node name="Player" parent="." instance=ExtResource("3_7qfvu")]
