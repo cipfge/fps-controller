@@ -1,17 +1,15 @@
 extends CharacterBody3D
 
 @export_category("Movement")
-@export var WalkSpeed: float = 4.5
-@export var CrouchSpeed: float = 2.5
-@export var SprintSpeed: float = 9.5
-@export var LerpSpeed: float = 10.0
+@export var WalkingSpeed: float = 4.5
+@export var CrouchingSpeed: float = 2.5
+@export var SprintingSpeed: float = 9.5
+@export var Acceleration: float = 0.1
+@export var Deceleration: float = 0.25
 @export var JumpVelocity: float = 5.0
 
 @export_category("Controller")
 @export var MouseSensitivity: float = 0.3
-
-@export_category("Animation")
-@export var CrouchAnimationSpeed: float = 5.0
 
 # Camera Up/Down limits
 const TiltLowerLimit: float = deg_to_rad(-90.0)
@@ -24,7 +22,7 @@ const TiltUpperLimit: float = deg_to_rad(90.0)
 var input_rotation := Vector2.ZERO
 var controller_rotation := Vector2.ZERO
 var move_direction := Vector3.ZERO
-var current_speed: float = WalkSpeed
+var speed: float = WalkingSpeed
 var crouching: bool = false
 
 func _ready() -> void:
@@ -49,21 +47,20 @@ func _physics_process(delta: float) -> void:
 
     if Input.is_action_just_pressed("jump") and is_on_floor():
        velocity.y = JumpVelocity
-    
-    var speed := current_speed
-    if Input.is_action_pressed("sprint") and crouching == false:
-        speed = SprintSpeed
 
     var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-    move_direction = lerp(move_direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * LerpSpeed)
+    move_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
     if move_direction:
-        velocity.x = move_direction.x * speed
-        velocity.z = move_direction.z * speed
+        velocity.x = lerp(velocity.x, move_direction.x * speed, Acceleration)
+        velocity.z = lerp(velocity.z, move_direction.z * speed, Acceleration)
     else:
-        velocity.x = move_toward(velocity.x, 0, speed)
-        velocity.z = move_toward(velocity.z, 0, speed)
-
+        var old_velocity = Vector2(velocity.x, velocity.z)
+        var tmp = move_toward(Vector2(velocity.x, velocity.z).length(), 0.0, Deceleration)
+        velocity.x = old_velocity.normalized().x * tmp
+        velocity.z = old_velocity.normalized().y * tmp
+        
+    Global.DebugPanel.add_debug_info("Speed", speed)
     move_and_slide()
 
 func update_rotation(delta) -> void:
@@ -79,13 +76,11 @@ func update_rotation(delta) -> void:
     global_transform.basis = Basis.from_euler(player_rotation)
 
     input_rotation = Vector2.ZERO
-    
+
 func toggle_crouching() -> void:
     if crouching == true and crouch_shape_cast.is_colliding() == false:
-        animation_player.play("crouch", -1, -CrouchAnimationSpeed, true)
-        current_speed = WalkSpeed
+        speed = WalkingSpeed
         crouching = false
     elif crouching == false:
-        animation_player.play("crouch", -1, CrouchAnimationSpeed, false)
-        current_speed = CrouchSpeed
+        speed = CrouchingSpeed
         crouching = true
