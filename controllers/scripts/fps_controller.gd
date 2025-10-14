@@ -26,61 +26,51 @@ var speed: float = WalkingSpeed
 var crouching: bool = false
 
 func _ready() -> void:
-    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-    crouch_shape_cast.add_exception($".")
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	crouch_shape_cast.add_exception($".")
 
 func _input(event: InputEvent) -> void:
-    if event.is_action_pressed("exit_game"):
-        get_tree().quit()
-    if event.is_action_pressed("crouch"):
-        toggle_crouching()
+	if event.is_action_pressed("exit_game"):
+		get_tree().quit()
 
 func _unhandled_input(event: InputEvent) -> void:
-    if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-        input_rotation = Vector2(-event.relative.y * MouseSensitivity, -event.relative.x * MouseSensitivity)
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		input_rotation = Vector2(-event.relative.y * MouseSensitivity, -event.relative.x * MouseSensitivity)
 
 func _physics_process(delta: float) -> void:
-    update_rotation(delta)
+	update_rotation(delta)
 
-    if not is_on_floor():
-        velocity += get_gravity() * delta
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 
-    if Input.is_action_just_pressed("jump") and is_on_floor():
-       velocity.y = JumpVelocity
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JumpVelocity
 
-    var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-    move_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	move_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-    if move_direction:
-        velocity.x = lerp(velocity.x, move_direction.x * speed, Acceleration)
-        velocity.z = lerp(velocity.z, move_direction.z * speed, Acceleration)
-    else:
-        var old_velocity = Vector2(velocity.x, velocity.z)
-        var tmp = move_toward(Vector2(velocity.x, velocity.z).length(), 0.0, Deceleration)
-        velocity.x = old_velocity.normalized().x * tmp
-        velocity.z = old_velocity.normalized().y * tmp
-        
-    Global.DebugPanel.add_debug_info("Speed", speed)
-    move_and_slide()
+	if move_direction:
+		velocity.x = lerp(velocity.x, move_direction.x * speed, Acceleration)
+		velocity.z = lerp(velocity.z, move_direction.z * speed, Acceleration)
+	else:
+		var old_velocity = Vector2(velocity.x, velocity.z)
+		var tmp = move_toward(Vector2(velocity.x, velocity.z).length(), 0.0, Deceleration)
+		velocity.x = old_velocity.normalized().x * tmp
+		velocity.z = old_velocity.normalized().y * tmp
+		
+	Global.DebugPanel.add_debug_info("Speed", speed)
+	move_and_slide()
 
 func update_rotation(delta) -> void:
-    controller_rotation.x += input_rotation.x * delta
-    controller_rotation.x = clamp(controller_rotation.x, TiltLowerLimit, TiltUpperLimit)
-    controller_rotation.y += input_rotation.y * delta
-    
-    var player_rotation: Vector3 = Vector3(0.0, controller_rotation.y, 0.0)
-    var camera_rotation: Vector3 = Vector3(controller_rotation.x, 0.0, 0.0)
+	controller_rotation.x += input_rotation.x * delta
+	controller_rotation.x = clamp(controller_rotation.x, TiltLowerLimit, TiltUpperLimit)
+	controller_rotation.y += input_rotation.y * delta
+	
+	var player_rotation: Vector3 = Vector3(0.0, controller_rotation.y, 0.0)
+	var camera_rotation: Vector3 = Vector3(controller_rotation.x, 0.0, 0.0)
 
-    camera_controller.transform.basis = Basis.from_euler(camera_rotation)
-    camera_controller.rotation.z = 0.0
-    global_transform.basis = Basis.from_euler(player_rotation)
+	camera_controller.transform.basis = Basis.from_euler(camera_rotation)
+	camera_controller.rotation.z = 0.0
+	global_transform.basis = Basis.from_euler(player_rotation)
 
-    input_rotation = Vector2.ZERO
-
-func toggle_crouching() -> void:
-    if crouching == true and crouch_shape_cast.is_colliding() == false:
-        speed = WalkingSpeed
-        crouching = false
-    elif crouching == false:
-        speed = CrouchingSpeed
-        crouching = true
+	input_rotation = Vector2.ZERO

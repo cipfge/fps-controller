@@ -6,8 +6,11 @@ extends State
 @export var PlayerAnimations: AnimationPlayer
 
 func enter() -> void:
-    PlayerAnimations.pause()
+	PlayerAnimations.pause()
+
+func exit() -> void:
+	PlayerAnimations.speed_scale = 1.0
 
 func update(_delta) -> void:
-    if Player.is_on_floor():
-        transition.emit("WalkingState")
+	if Player.is_on_floor():
+		transition.emit("WalkingState")
