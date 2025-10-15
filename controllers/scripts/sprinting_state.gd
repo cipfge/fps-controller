@@ -5,13 +5,14 @@ class_name SprintingState extends State
 @export var AnimationSpeed: float = 2.2
 
 func enter() -> void:
-	PlayerAnimations.play("sprinting", 0.5, 1.0)
 	Player.speed = Player.SprintingSpeed
 
 func exit() -> void:
 	PlayerAnimations.speed_scale = 1.0
 
 func update(_delta) -> void:
+	if Player.is_on_floor() == false:
+		transition.emit("JumpingState")
 	set_animation_speed(Player.velocity.length())
 
 func set_animation_speed(speed: float) -> void:

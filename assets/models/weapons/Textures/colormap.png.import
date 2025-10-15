@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm63rt1bf4uuf"
-path.s3tc="res://.godot/imported/texture_10.png-40c76157af98998ae80fb22efe218b0e.s3tc.ctex"
+uid="uid://cy7rq4faka0x8"
+path.s3tc="res://.godot/imported/colormap.png-9b65e001ec29b3cfbe09dda77fb698cd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/grid/red/texture_10.png"
-dest_files=["res://.godot/imported/texture_10.png-40c76157af98998ae80fb22efe218b0e.s3tc.ctex"]
+source_file="res://assets/models/weapons/Textures/colormap.png"
+dest_files=["res://.godot/imported/colormap.png-9b65e001ec29b3cfbe09dda77fb698cd.s3tc.ctex"]
 
 [params]
 

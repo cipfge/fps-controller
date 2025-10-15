@@ -26,9 +26,9 @@ func on_child_transition(new_state_name: StringName) -> void:
 	if new_state == null:
 		push_warning("State %s does not exist in the state list" % new_state_name)
 		return
-
 	if  new_state != CurrentState:
-		print("Transition: %s -> %s" % [CurrentState.name, new_state.name])
+		if OS.is_debug_build():
+			print("Transition: %s -> %s" % [CurrentState.name, new_state.name])
 		CurrentState.exit()
 		CurrentState = new_state;
 		CurrentState.enter()

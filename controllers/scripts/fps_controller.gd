@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 		var tmp = move_toward(Vector2(velocity.x, velocity.z).length(), 0.0, Deceleration)
 		velocity.x = old_velocity.normalized().x * tmp
 		velocity.z = old_velocity.normalized().y * tmp
-		
+
 	Global.DebugPanel.add_debug_info("Speed", speed)
 	move_and_slide()
 

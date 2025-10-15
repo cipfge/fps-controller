@@ -12,9 +12,13 @@ func exit() -> void:
 	PlayerAnimations.speed_scale = 1.0
 
 func update(_delta) -> void:
-	set_animation_speed(Player.velocity.length())
+	if Player.is_on_floor() == false:
+		transition.emit("JumpingState")
+
 	if Player.velocity.length() == 0.0 and Player.is_on_floor():
 		transition.emit("IdleState")
+
+	set_animation_speed(Player.velocity.length())
 
 func set_animation_speed(speed: float) -> void:
 	var alpha = remap(speed, 0.0, Player.WalkingSpeed, 0.0, 1.0)

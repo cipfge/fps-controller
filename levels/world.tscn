@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://7unjnrh3vnfg"]
+[gd_scene load_steps=11 format=3 uid="uid://7unjnrh3vnfg"]
 
 [ext_resource type="Texture2D" uid="uid://ytynpl8knjpb" path="res://assets/hdri/starry_night_sky_dome_2k.hdr" id="1_nnqtj"]
 [ext_resource type="Material" uid="uid://ccxbxpus0b7dr" path="res://materials/floor.tres" id="2_40uua"]
 [ext_resource type="PackedScene" uid="uid://doayvc0xisily" path="res://controllers/fps_controller.tscn" id="3_7qfvu"]
 [ext_resource type="Material" uid="uid://drn0jdu8i1pjl" path="res://materials/wall.tres" id="3_l461q"]
 [ext_resource type="Material" uid="uid://dh06onqtxmfyw" path="res://materials/block.tres" id="3_w1mgy"]
+[ext_resource type="Material" uid="uid://cdbl4ghcab8" path="res://materials/wall_b.tres" id="4_i8ckm"]
+[ext_resource type="PackedScene" uid="uid://gnogehh2cq5b" path="res://models/crate_wide.tscn" id="7_legw5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bnl26"]
 panorama = ExtResource("1_nnqtj")
@@ -60,22 +62,60 @@ use_collision = true
 size = Vector3(0.5, 2, 25)
 material = ExtResource("3_l461q")
 
-[node name="Block_01" type="CSGBox3D" parent="Platform_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.25)
+[node name="Wall_05" type="CSGBox3D" parent="Platform_01"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.438035, 1.2933965, 9.510954)
 use_collision = true
-size = Vector3(6, 1.7, 0.5)
+size = Vector3(0.5, 4, 18)
+material = ExtResource("4_i8ckm")
+
+[node name="Wall_05" type="CSGBox3D" parent="Platform_01/Wall_05"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.010831356, -0.03654027, 13.499514)
+use_collision = true
+size = Vector3(0.5, 4, 3)
+material = ExtResource("4_i8ckm")
+
+[node name="Tunnel_01" type="Node" parent="Platform_01"]
+
+[node name="Block_01" type="CSGBox3D" parent="Platform_01/Tunnel_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6949377, 0.8136171, -6.25)
+use_collision = true
+size = Vector3(6, 1.6, 0.5)
 material = ExtResource("3_w1mgy")
 
-[node name="Block_02" type="CSGBox3D" parent="Platform_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -1)
+[node name="Block_02" type="CSGBox3D" parent="Platform_01/Tunnel_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6949377, 1.8605142, -7.5)
 use_collision = true
 size = Vector3(6, 0.5, 3)
 material = ExtResource("3_w1mgy")
 
-[node name="Block_03" type="CSGBox3D" parent="Platform_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -2.25)
+[node name="Block_03" type="CSGBox3D" parent="Platform_01/Tunnel_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6949377, 0.8109305, -8.75)
 use_collision = true
-size = Vector3(6, 1.7, 0.5)
+size = Vector3(6, 1.6, 0.5)
 material = ExtResource("3_w1mgy")
 
+[node name="Tunnel_02" type="Node" parent="Platform_01"]
+
+[node name="Block_04" type="CSGBox3D" parent="Platform_01/Tunnel_02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7601874, 1.2651103)
+use_collision = true
+size = Vector3(6, 3.5, 0.5)
+material = ExtResource("3_w1mgy")
+
+[node name="Block_05" type="CSGBox3D" parent="Platform_01/Tunnel_02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7523785, -0.7342036)
+use_collision = true
+size = Vector3(6, 0.5, 4.5)
+material = ExtResource("3_w1mgy")
+
+[node name="Block_06" type="CSGBox3D" parent="Platform_01/Tunnel_02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7520256, -2.7334213)
+use_collision = true
+size = Vector3(6, 3.5, 0.5)
+material = ExtResource("3_w1mgy")
+
+[node name="CrateWide" parent="Platform_01/Tunnel_02" instance=ExtResource("7_legw5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08164823, -1.5126655)
+
 [node name="Player" parent="." instance=ExtResource("3_7qfvu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5689187, 0, -4.4373035)

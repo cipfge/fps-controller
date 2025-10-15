@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://doayvc0xisily"]
+[gd_scene load_steps=22 format=3 uid="uid://doayvc0xisily"]
 
 [ext_resource type="Script" uid="uid://d0b6k4r25c2mb" path="res://controllers/scripts/fps_controller.gd" id="1_g3qal"]
 [ext_resource type="Material" uid="uid://c7w5nhqc43peh" path="res://materials/fps_controller.tres" id="2_ds2y7"]
 [ext_resource type="Script" uid="uid://cvxm68f4grnr6" path="res://controllers/scripts/crosshair.gd" id="3_65rq4"]
+[ext_resource type="PackedScene" uid="uid://d0md3f6eosafi" path="res://models/blaster.tscn" id="3_l8yvu"]
 [ext_resource type="Theme" uid="uid://dm8mdrmxeor0w" path="res://user_interface/theme/debug_ui_theme.tres" id="4_36crs"]
 [ext_resource type="StyleBox" uid="uid://b0cvpuvm050vs" path="res://user_interface/theme/debug_ui_style_box.tres" id="5_ju3dp"]
 [ext_resource type="Script" uid="uid://bpfac0482gl3a" path="res://controllers/scripts/debug_panel.gd" id="6_8akev"]
@@ -239,6 +240,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraController"]
 
+[node name="WeaponRig" type="Node3D" parent="CameraController/Camera"]
+
+[node name="Blaster" parent="CameraController/Camera/WeaponRig" instance=ExtResource("3_l8yvu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.2, -0.5)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_lv85c")
@@ -327,8 +333,10 @@ script = ExtResource("10_oybit")
 Player = NodePath("../..")
 PlayerAnimations = NodePath("../../AnimationPlayer")
 
-[node name="JumpingState" type="Node" parent="PlayerStateMachine"]
+[node name="JumpingState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("Player", "PlayerAnimations")]
 script = ExtResource("11_i3xs3")
+Player = NodePath("../..")
+PlayerAnimations = NodePath("../../AnimationPlayer")
 
 [node name="CrouchingState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("Player", "PlayerAnimations", "CrouchShapeCast")]
 script = ExtResource("12_gxxi5")
